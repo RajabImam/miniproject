@@ -82,7 +82,7 @@ public class AuthServlet extends HttpServlet {
             throws ServletException, IOException {
         String login = request.getParameter("login");
         String password = request.getParameter("password");
-        
+        HttpSession session = request.getSession();
         AuthenticationModel authModel = new AuthenticationModel();
         authModel.setLogin(login);
         authModel.setPassword(password);
@@ -92,6 +92,7 @@ public class AuthServlet extends HttpServlet {
         String userValidation = auth.userAuthentication(authModel);
         if (userValidation.equals("SUCCESS")) {
             request.setAttribute("login", login);
+            session.setAttribute("login", login);
             request.getRequestDispatcher("/welcome.jsp").forward(request, response);
         }else {
             request.setAttribute("ErrMessage", userValidation);

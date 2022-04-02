@@ -12,6 +12,11 @@
         <title>Confirmation - Mini Project</title>
     </head>
     <body>
+         <% 
+            if (session.getAttribute("login") == null) {
+                    response.sendRedirect("index.jsp");
+                }
+           %>
        <div>
            <h1>Confirmation! </h1> 
            <br>
@@ -19,5 +24,6 @@
                <input type="submit" value="Log Out" />
            </form>
         </div>
+        
     </body>
 </html>

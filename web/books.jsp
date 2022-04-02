@@ -12,6 +12,11 @@
         <title>Books - Mini Project</title>
     </head>
     <body>
+         <% 
+            if (session.getAttribute("login") == null) {
+                    response.sendRedirect("index.jsp");
+                }
+           %>
         <div>
             <h1>Books </h1> 
             <br>

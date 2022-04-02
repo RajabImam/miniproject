@@ -14,12 +14,17 @@
     <body>
         <div>
            <h1>Welcome to Web Technologies Mini Project! </h1> 
-           Hi! <%= request.getAttribute("login") %>
+           <h3>Hi! <%= request.getAttribute("login") %> </h3>
            <br>
            <form method="GET" action="AuthServlet">
                <input type="submit" value="Log Out" />
            </form>
         </div>
+           <% 
+            if (session.getAttribute("login") == null) {
+                    response.sendRedirect("index.jsp");
+                }
+           %>
            <div>
                <h3>Book Search</h3>
                <form action="" method="post">

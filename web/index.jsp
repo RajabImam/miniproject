@@ -19,9 +19,9 @@
             <fieldset class="infoFieldset">
                 <legend>Sign In:</legend>
                 <label for="login">Login:</label>
-                <input type="text" name="login" id="login" />
+                <input type="text" name="login" id="login" required="required"/>
                 <label for="password">Password:</label>
-               <input type="password" name="password" id="password"/>
+                <input type="password" name="password" id="password" required="required"/>
                <div id="msg"></div>
             </fieldset>
             <input type="submit" value="Login" id="btn"/>

@@ -15,8 +15,8 @@
         <div>
            <h1>Error Logging In!</h1> 
            <h3>Try Again with correct credentials</h3>
-           <a href="/index.jsp">Try again</a>
+           <a href="/MiniProject/index.jsp">Try again</a>
         </div>
-        
+         
     </body>
 </html>
