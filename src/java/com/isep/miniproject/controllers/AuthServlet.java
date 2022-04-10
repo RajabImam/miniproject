@@ -6,9 +6,15 @@
 package com.isep.miniproject.controllers;
 
 import com.isep.miniproject.dao.Authentication;
+import com.isep.miniproject.dao.Books;
 import com.isep.miniproject.models.AuthenticationModel;
+import com.isep.miniproject.models.BookModel;
+import com.isep.miniproject.models.WelcomeViewModel;
+import com.isep.miniproject.repository.BooksRepository;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.*;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +27,7 @@ import javax.servlet.http.HttpSession;
  */
 public class AuthServlet extends HttpServlet {
 
+    static BooksRepository bookStore;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -64,7 +71,6 @@ public class AuthServlet extends HttpServlet {
             //session.invalidate();
             session.setAttribute("ErrMessage ", " You have logged out successfully");
             request.getRequestDispatcher("/goodbye.jsp").forward(request, response);
-            
         }
         
     }
@@ -93,12 +99,26 @@ public class AuthServlet extends HttpServlet {
         if (userValidation.equals("SUCCESS")) {
             request.setAttribute("login", login);
             session.setAttribute("login", login);
-            request.getRequestDispatcher("/welcome.jsp").forward(request, response);
-        }else {
+            
+            //initialize bookstore
+            bookStore = BooksRepository.getInstance();
+            
+            //get a list of all books from repository 
+            Books books = new Books();
+            ArrayList<BookModel> result = books.getAllBook();
+                    
+            //add books to the view model
+            WelcomeViewModel welcomeView = new WelcomeViewModel(result);
+            
+            //set a session variable to store the list of books
+            session.setAttribute("welcomeView", welcomeView);
+            //resirect to welcome page
+            RequestDispatcher rd = request.getRequestDispatcher("welcome.jsp");
+            rd.forward(request, response);
+        }
             request.setAttribute("ErrMessage", userValidation);
             request.getRequestDispatcher("/error.jsp").forward(request, response);
         }
-    }
 
     /**
      * Returns a short description of the servlet.
@@ -109,5 +129,4 @@ public class AuthServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }

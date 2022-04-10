@@ -7,6 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+    <a href = "index.jsp">Login</a>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Goodbye - Mini Project</title>
