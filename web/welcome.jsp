@@ -20,6 +20,8 @@
             <h1>Welcome to Web Technologies Mini Project! </h1> 
             <h3>Hi! <%= request.getAttribute("login")%> </h3>
             <br>
+            <h3>This Mini Project is Designed by: </h3>
+            <h4>Tobias Odion Osemegbe 62200 and Rajab Mohammed Imam 62198</h4>
             <form method="GET" action="AuthServlet">
                 <input type="submit" value="Log Out" />
             </form>
