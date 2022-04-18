@@ -29,4 +29,6 @@ public class WelcomeViewModel implements Serializable {
     public void setBooks(ArrayList<BookModel> books){
         this.books = books;
     }
+    
+    
 }

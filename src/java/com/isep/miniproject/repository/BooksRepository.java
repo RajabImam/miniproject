@@ -56,4 +56,14 @@ public final class BooksRepository {
         
         return null;
     }
+    
+    public int updateBook(BookModel book){
+        String isbn = book.getIsbn();
+        if(bookStore.containsKey(isbn)){
+            bookStore.put(isbn, book);
+            return 1;
+        }
+        
+        return 0;
+    }
 }

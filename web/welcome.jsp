@@ -7,8 +7,8 @@
 <%@page contentType="text/html" 
         pageEncoding="UTF-8"
         import="com.isep.miniproject.models.WelcomeViewModel, 
-                com.isep.miniproject.models.BookModel,
-                java.util.*"%>
+        com.isep.miniproject.models.BookModel,
+        java.util.*"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -18,7 +18,7 @@
     <body>
         <div>
             <h1>Welcome to Web Technologies Mini Project! </h1> 
-            <h3>Hi! <%= request.getAttribute("login")%> </h3>
+            <h3>Hi! <%= session.getAttribute("login")%> </h3>
             <br>
             <h3>This Mini Project is Designed by: </h3>
             <h4>Tobias Odion Osemegbe 62200 and Rajab Mohammed Imam 62198</h4>
@@ -43,7 +43,7 @@
         </div>
 
         <div>
-            <h3>Books Search Results</h3>
+            <h3>Available Books</h3>
             <table>
                 <thead>
                 <th>ISBN</th>
@@ -62,12 +62,23 @@
                             out.print("<td>" + book.getBookTitle() + "</td>");
                             out.print("<td>" + book.getAuthor() + "</td>");
                             out.print("<td>" + book.getReleaseYear() + "</td>");
-                            
+
                             if (book.getStatus() == 1) {
                                 out.print("<td>Available</td>");
-                                out.print("<td><a href=\"\">Reserve Book</a></td>");
+                                out.print("<td>"
+                                        + "<form action = \"ResServlet\" method = \"post\">"
+                                        + "<input type=\"hidden\" name=\"isbn\" value =" + "\"" + book.getIsbn() + "\"" + ">"
+                                        + "<input type=\"submit\" value =\"Reserve\" />"
+                                        + "</form>"
+                                        + "</td>");
                             } else {
                                 out.print("<td>Unavailable</td>");
+                                out.print("<td>"
+                                        + "<form action = \"ResServlet\" method = \"post\">"
+                                        + "<input type=\"hidden\" name=\"isbn\" value =" + "\"" + book.getIsbn() + "\"" + ">"
+                                        + "<input type=\"submit\" value =\"Unreserve\" />"
+                                        + "</form>"
+                                        + "</td>");
                             }
                             out.print("</tr>");
                         }

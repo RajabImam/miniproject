@@ -21,7 +21,7 @@ public class Books {
         return book;
     }
     
-    public ArrayList<BookModel> getAllBook(){
+    public static ArrayList<BookModel> getAllBook(){
         ArrayList<BookModel> books = new ArrayList<>();
         
         BooksRepository bookStore = BooksRepository.getInstance();
@@ -37,5 +37,21 @@ public class Books {
         }
         
         return books;
+    }
+    
+    public static int updateBookStatus(String isbn){
+        BooksRepository bookStore = BooksRepository.getInstance();
+        
+        BookModel updatedBook = bookStore.getBookByIsbn(isbn);
+        if(updatedBook.getStatus() == 0){
+            updatedBook.setStatus(1);
+        }
+        else{
+            updatedBook.setStatus(0);
+        }
+        
+        int result = bookStore.updateBook(updatedBook);
+        
+        return result;
     }
 }

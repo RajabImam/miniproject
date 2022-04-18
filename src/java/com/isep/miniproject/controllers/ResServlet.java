@@ -9,6 +9,7 @@ import com.isep.miniproject.dao.Books;
 import com.isep.miniproject.models.BookModel;
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.System.out;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -40,12 +41,17 @@ public class ResServlet extends HttpServlet {
         //get book from repository
         BookModel result = Books.findBook(isbn);
         
-        //cast result to object if RDBMS is used
-        
-        session.setAttribute("book", result);
+        if(result == null){
+            RequestDispatcher rd = request.getRequestDispatcher("notfound.jsp");
+            rd.forward(request, response);
+        }
+        else{
+            //cast result to object if RDBMS is used    
+            session.setAttribute("book", result);
 
-        RequestDispatcher rd = request.getRequestDispatcher("books.jsp");
-        rd.forward(request, response);
+            RequestDispatcher rd = request.getRequestDispatcher("books.jsp");
+            rd.forward(request, response);
+        }
     }
 
     /**
@@ -59,6 +65,10 @@ public class ResServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+            String isbn = request.getParameter("isbn");
+         
+            int result = Books.updateBookStatus(isbn);
+            
+            response.sendRedirect("WelcomeServlet");
     }
 }

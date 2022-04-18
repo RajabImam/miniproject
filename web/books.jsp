@@ -59,15 +59,24 @@
                     <td><jsp:getProperty name = 'book' property = 'bookTitle'/></td>
                     <td><jsp:getProperty name = 'book' property = 'releaseYear'/></td>
                     <td><jsp:getProperty name = 'book' property = 'author'/></td>
-                    <%
-                        int status = book.getStatus();
-                        if (status == 1) {
+                    <%   
+                        if (book.getStatus() == 1) {
                             out.print("<td>Available</td>");
-                            out.print("<td><a href=\"\">Reserve Book</a></td>");
+                            out.print("<td>"
+                            + "<form action = \"ResServlet\" method = \"post\">"
+                            + "<input type=\"hidden\" name=\"isbn\" value =" + "\"" + book.getIsbn() + "\"" + ">"
+                            + "<input type=\"submit\" value =\"Reserve\" />"
+                            + "</form>"
+                            + "</td>");
                         } else {
                             out.print("<td>Unavailable</td>");
-                        }
-                        
+                            out.print("<td>"
+                            + "<form action = \"ResServlet\" method = \"post\">"
+                            + "<input type=\"hidden\" name=\"isbn\" value =" + "\"" + book.getIsbn() + "\"" + ">"
+                            + "<input type=\"submit\" value =\"Unreserve\" />"
+                            + "</form>"
+                            + "</td>");
+                        }                   
                     %> 
 
                 </tr>
